@@ -17,9 +17,9 @@ const Nav = () => {
           className="object-contain"
         />
         <p className="logo_text">Promptopia</p>
-
-        {/* Desktop Navigation */}
-        <div className="sm:flex hidden">
+      </Link>
+      {/* Desktop Navigation */}
+      <div className="sm:flex hidden">
           {isUserLoggedIn ? (
             <div className="flex gap-3 md:gap-5">
               <Link href="/create-prompt" className="black_btn">
@@ -30,7 +30,6 @@ const Nav = () => {
             <></>
           )}
         </div>
-      </Link>
     </nav>
   );
 };
