@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+  const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -20,7 +20,8 @@ const Nav = () => {
   }, []);
 
   const renderSingInProviders = () => {
-    providers &&
+    return (
+      providers &&
       Object.values(providers).map((provider) => (
         <button
           type="button"
@@ -30,19 +31,21 @@ const Nav = () => {
         >
           Sign In
         </button>
-      ));
+      )),
+    );
   };
 
   const renderProfileImage = (onClickFunction) => {
-    return(
-    <Image
-      src="/assets/images/profile.jpg"
-      width={37}
-      height={37}
-      className="rounded-full"
-      alt="profile"
-      onClick={onClickFunction}
-    />)
+    return (
+      <Image
+        src="/assets/images/profile.jpg"
+        width={37}
+        height={37}
+        className="rounded-full"
+        alt="profile"
+        onClick={onClickFunction}
+      />
+    );
   };
 
   const handleProfileClick = () => {
@@ -62,15 +65,17 @@ const Nav = () => {
         <p className="logo_text">Promptopia</p>
       </Link>
 
+      
+
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
 
-            <button type="button" onClick={signOut()} className="outline_btn">
+            <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>
 
@@ -85,7 +90,7 @@ const Nav = () => {
 
       {/* Movile Navigation */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             {renderProfileImage(handleProfileClick)}
             {toggleDropdown && (
@@ -108,7 +113,7 @@ const Nav = () => {
                   type="button"
                   onClick={() => {
                     setToggleDropdown(false);
-                    signOut();
+                    signOut;
                   }}
                   className="mt- w-full black_btn"
                 >
