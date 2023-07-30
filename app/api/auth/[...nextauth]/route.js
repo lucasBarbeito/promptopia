@@ -40,7 +40,7 @@ const handler = NextAuth({
           await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(), //este replace lo que hace es reemplazar los espacios (" ") por no espacios ("")
-            image: profile.image,
+            image: profile.picture,
           });
         }
 
