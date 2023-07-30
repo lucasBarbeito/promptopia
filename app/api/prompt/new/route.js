@@ -10,7 +10,7 @@ export const POST = async (req, res) => {
         const newPrompt = new Prompt({
             creator: userID,
             prompt,
-            tag: tag,
+            tag,
         })
 
         await newPrompt.save();
