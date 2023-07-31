@@ -17,6 +17,22 @@ const MyProfile = () => {
     }
 
     const handleDelete = async (post) => {
+        const hasConfirmed = confirm("Are you sure that you want to delete this post?")
+
+        if (hasConfirmed) {
+            try {
+                await fetch(`api/prompt/${post._id.toString()}`, {
+                    method: 'DELETE'
+                })
+
+                const filteredPosts = posts.filter((filteredPost) => filteredPost._id !== post._id)
+
+                setPosts(filteredPosts)
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
 
     }
 
@@ -29,7 +45,7 @@ const MyProfile = () => {
         }
 
 
-        if(session?.user.id) fetchPosts()
+        if (session?.user.id) fetchPosts()
     }, [])
     return (
         <Profile
