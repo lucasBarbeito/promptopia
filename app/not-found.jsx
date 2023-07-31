@@ -31,7 +31,7 @@ const NotFound = () => {
                 </div>
             </div>
             <div>
-                <Image src="/assets/images/MessiChiquito.jpg" width={400} height={500}/>
+                <Image src="/assets/images/MessiChiquito.jpg" width={400} height={500} alt="Messi_chiquito"/>
             </div>
         </div>
     )
